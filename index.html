@@ -34,14 +34,11 @@
     }
 
     /* ─── LOGO ─── */
-    .logo {
-      display: flex; flex-direction: column; line-height: 0.9;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900; letter-spacing: -1px; text-transform: uppercase;
-      user-select: none;
+    .logo img {
+      height: 44px; width: auto;
+      filter: invert(1);
+      display: block;
     }
-    .logo .top, .logo .bot { font-size: 1.55rem; color: var(--white); }
-    .logo .bolt { color: var(--cyan); }
 
     /* ─── NAV ─── */
     nav {
@@ -662,8 +659,7 @@
 <!-- NAV -->
 <nav>
   <div class="logo">
-    <span class="top">SOC<span class="bolt">⚡</span>AL</span>
-    <span class="bot">HERO</span>
+    <img src="logo.png" alt="Social Hero" />
   </div>
   <button class="nav-cta" onclick="document.getElementById('contatto').scrollIntoView({behavior:'smooth'})">
     Richiedi info →
