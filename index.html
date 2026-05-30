@@ -1201,11 +1201,40 @@
       return;
     }
 
-    // Raccogli le risposte dal form multi-step
-    const obiettivi = [...document.querySelectorAll('#choices1 .choice-label.selected')].map(l => l.dataset.val).join(', ');
-    const servizi   = [...document.querySelectorAll('#choices2 .choice-label.selected')].map(l => l.dataset.val).join(', ');
-    const situaz    = document.querySelector('#choices3 .choice-label.selected')?.dataset.val || '-';
-    const budget    = document.querySelector('#choices4 .choice-label.selected')?.dataset.val || '-';
+    // Mappa valori → testo leggibile
+    const labelMap = {
+      // Obiettivi
+      prenotazioni: 'Più prenotazioni',
+      immagine:     'Migliorare l\'immagine online',
+      social:       'Gestione social attiva',
+      adv:          'Campagne pubblicitarie',
+      contenuti:    'Contenuti foto e video',
+      tutto:        'Tutto quanto 🚀',
+      // Servizi
+      fotovideo:  'Fotografia & Video professionale',
+      gestione:   'Gestione profili social',
+      ads:        'Campagne Meta / Google Ads',
+      strategia:  'Strategia e consulenza',
+      branding:   'Branding e identità visiva',
+      // Situazione
+      solo:     'Gestisco tutto da solo',
+      agenzia:  'Ho già un\'agenzia o freelance',
+      parttime: 'Ho qualcuno part-time',
+      provato:  'Ho provato ma non ero soddisfatto',
+      niente:   'Non ho nulla, parto da zero',
+      // Budget
+      '0':      'Non ho ancora un budget definito',
+      basso:    'Meno di €300/mese',
+      medio:    'Tra €300 e €700/mese',
+      alto:     'Tra €700 e €1.500/mese',
+      premium:  'Oltre €1.500/mese',
+    };
+    const readable = v => labelMap[v] || v;
+
+    const obiettivi = [...document.querySelectorAll('#choices1 .choice-label.selected')].map(l => readable(l.dataset.val)).join('\n             ');
+    const servizi   = [...document.querySelectorAll('#choices2 .choice-label.selected')].map(l => readable(l.dataset.val)).join('\n             ');
+    const situaz    = readable(document.querySelector('#choices3 .choice-label.selected')?.dataset.val || '-');
+    const budget    = readable(document.querySelector('#choices4 .choice-label.selected')?.dataset.val || '-');
 
     const body = `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1216,12 +1245,19 @@ Ristorante:  ${locale}
 Telefono:    ${tel}
 Email:       ${email || '-'}
 
-OBIETTIVI:   ${obiettivi || '-'}
-SERVIZI:     ${servizi || '-'}
-SITUAZIONE:  ${situaz}
-BUDGET:      ${budget}
+❓ Cosa vorresti ottenere?
+             ${obiettivi || '-'}
 
-MESSAGGIO:
+❓ Quali servizi ti interessano?
+             ${servizi || '-'}
+
+❓ Come gestisci oggi la comunicazione?
+             ${situaz}
+
+❓ Quanto pensi di investire ogni mese?
+             ${budget}
+
+💬 Messaggio libero:
 ${msg || '-'}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━`.trim();
 
