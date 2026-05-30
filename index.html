@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Hero — Ristoranti</title>
+  <meta name="description" content="Trasforma il tuo ristorante in un brand riconoscibile. Contenuti, social e advertising che portano più prenotazioni." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #080f1e;
+      --navy2:  #0d1a30;
+      --navy3:  #132040;
+      --cyan:   #00c8ff;
+      --cyan2:  #00e5ff;
+      --blue:   #1a6bff;
+      --white:  #ffffff;
+      --gray:   #7a96b8;
+      --radius: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── LOGO ─── */
+    .logo {
+      display: flex; flex-direction: column; line-height: 0.9;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; letter-spacing: -1px; text-transform: uppercase;
+      user-select: none;
+    }
+    .logo .top, .logo .bot { font-size: 1.55rem; color: var(--white); }
+    .logo .bolt { color: var(--cyan); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,15,30,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0,200,255,0.1);
+      padding: 14px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: var(--navy);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 0.95rem; letter-spacing: 0.5px;
+      text-decoration: none; padding: 9px 22px; border-radius: 50px;
+      white-space: nowrap; border: none; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,200,255,0.45); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 90vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      padding: 80px 24px 100px;
+      position: relative; overflow: hidden;
+      background: var(--navy);
+    }
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 55% at 50% -5%, rgba(0,130,255,0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(0,200,255,0.07) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,200,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,200,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 0%, transparent 80%);
+    }
+    .hero-badge {
+      position: relative;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,200,255,0.1);
+      border: 1px solid rgba(0,200,255,0.35);
+      border-radius: 50px; padding: 6px 20px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 30px;
+    }
+    .hero-badge .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--cyan);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+    .hero h1 {
+      position: relative;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3rem, 9vw, 6rem);
+      line-height: 0.95; text-transform: uppercase;
+      margin-bottom: 24px; max-width: 820px;
+      letter-spacing: -1px;
+    }
+    .hero h1 .line-accent { color: var(--cyan); }
+    .hero h1 .line-outline {
+      -webkit-text-stroke: 2px var(--white);
+      color: transparent;
+    }
+    .hero-sub {
+      position: relative;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: #90aecb; max-width: 520px; margin-bottom: 46px;
+      line-height: 1.7;
+    }
+    .hero-sub strong { color: var(--white); }
+    .hero-ctas { position: relative; display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+    .btn-main {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: var(--navy);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.15rem;
+      padding: 15px 38px; border-radius: 50px; border: none; cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 24px rgba(0,130,255,0.35);
+    }
+    .btn-main:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 32px rgba(0,130,255,0.5); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1.1rem;
+      padding: 15px 30px; border-radius: 50px; border: none; cursor: pointer;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--gray); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+      animation: scrollbounce 2.5s infinite;
+    }
+    .hero-scroll::after {
+      content: ''; width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(0,200,255,0.5), transparent);
+    }
+    @keyframes scrollbounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 90px 24px; }
+    .container { max-width: 1020px; margin: 0 auto; }
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 16px;
+    }
+    .section-eyebrow::before {
+      content: ''; display: block; width: 28px; height: 2px;
+      background: var(--cyan);
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; text-transform: uppercase;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.0; margin-bottom: 18px;
+    }
+    .section-title span { color: var(--cyan); }
+    .section-sub { color: var(--gray); font-size: 1.05rem; max-width: 580px; margin-bottom: 56px; line-height: 1.7; }
+
+    /* ─── PAIN / STATS STRIP ─── */
+    .pain { background: var(--navy2); }
+    .stats-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: rgba(0,200,255,0.1);
+      border: 1px solid rgba(0,200,255,0.1);
+      border-radius: var(--radius); overflow: hidden;
+      margin-bottom: 56px;
+    }
+    @media (max-width: 640px) { .stats-strip { grid-template-columns: repeat(2,1fr); } }
+    .stat-box {
+      background: var(--navy2); padding: 28px 20px; text-align: center;
+    }
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 2.5rem; color: var(--cyan); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: 0.88rem; color: var(--gray); }
+    .pain-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+    .pain-card {
+      background: var(--navy); border: 1px solid rgba(0,200,255,0.08);
+      border-radius: var(--radius); padding: 26px 22px;
+      display: flex; gap: 16px; align-items: flex-start;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .pain-card:hover { border-color: rgba(0,200,255,0.3); transform: translateY(-2px); }
+    .pain-icon { font-size: 1.7rem; flex-shrink: 0; }
+    .pain-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 5px; }
+    .pain-card p { font-size: 0.88rem; color: var(--gray); line-height: 1.55; }
+
+    /* ─── SERVICES ─── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
+    .service-card {
+      background: var(--navy2); border: 1px solid rgba(0,200,255,0.08);
+      border-radius: var(--radius); padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .service-card:nth-child(1) { grid-column: span 2; }
+    @media (max-width: 600px) { .service-card:nth-child(1) { grid-column: span 1; } }
+    .service-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,200,255,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .service-card:hover { transform: translateY(-3px); border-color: rgba(0,200,255,0.3); }
+    .service-num {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 3.5rem; color: rgba(0,200,255,0.12); line-height: 1;
+      position: absolute; top: 16px; right: 22px; pointer-events: none;
+    }
+    .service-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(0,200,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 18px;
+    }
+    .service-card h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.4rem; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .service-card p { font-size: 0.93rem; color: var(--gray); line-height: 1.6; }
+    .service-tag {
+      display: inline-block; margin-top: 16px;
+      padding: 5px 14px; border-radius: 50px;
+      background: rgba(0,200,255,0.1); color: var(--cyan);
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;
+    }
+
+    /* ─── FOTO GRID ─── */
+    .foto-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 500px) { .foto-grid { grid-template-columns: repeat(2, 1fr); } }
+    .foto-item {
+      border-radius: 12px; overflow: hidden; cursor: pointer;
+      position: relative; aspect-ratio: 1/1;
+      border: 1.5px solid rgba(0,200,255,0.08);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .foto-item:hover { border-color: var(--cyan); transform: scale(1.015); z-index: 1; }
+    .foto-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .foto-item:hover img { transform: scale(1.06); }
+    .foto-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,200,255,0); display: flex;
+      align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .foto-item:hover .foto-overlay { background: rgba(0,200,255,0.12); }
+    .foto-overlay svg { opacity: 0; transition: opacity 0.2s; }
+    .foto-item:hover .foto-overlay svg { opacity: 1; }
+
+    /* ─── LIGHTBOX ─── */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,0.93);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: min(90vw, 700px); max-height: 88vh;
+      border-radius: 12px; object-fit: contain;
+      box-shadow: 0 0 80px rgba(0,200,255,0.15);
+    }
+    #lb-close {
+      position: absolute; top: 18px; right: 22px;
+      background: rgba(255,255,255,0.1); border: none; cursor: pointer;
+      color: white; font-size: 1.6rem; line-height: 1; width: 42px; height: 42px;
+      border-radius: 50%; backdrop-filter: blur(4px);
+      transition: background 0.15s;
+    }
+    #lb-close:hover { background: rgba(0,200,255,0.3); }
+    #lb-prev, #lb-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.08); border: none; cursor: pointer;
+      color: white; font-size: 1.8rem; padding: 14px 16px;
+      border-radius: 10px; backdrop-filter: blur(4px);
+      transition: background 0.15s;
+    }
+    #lb-prev { left: 16px; } #lb-next { right: 16px; }
+    #lb-prev:hover, #lb-next:hover { background: rgba(0,200,255,0.25); }
+
+    /* ─── VIDEO GRID ─── */
+    .video-section { background: var(--navy2); }
+    .video-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    }
+    @media (max-width: 760px) { .video-grid { grid-template-columns: repeat(2, 1fr); } }
+    .video-wrap {
+      position: relative; border-radius: 14px; overflow: hidden;
+      border: 1.5px solid rgba(0,200,255,0.1);
+      background: #000; aspect-ratio: 9/16; cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .video-wrap:hover { border-color: rgba(0,200,255,0.4); box-shadow: 0 0 24px rgba(0,200,255,0.1); }
+    .video-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .video-controls {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 10px 10px 12px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      display: flex; align-items: center; justify-content: space-between; gap: 6px;
+    }
+    .btn-icon {
+      background: rgba(255,255,255,0.18); border: none; cursor: pointer;
+      border-radius: 50%; width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(6px);
+      transition: background 0.15s; flex-shrink: 0;
+    }
+    .btn-icon:hover { background: rgba(0,200,255,0.5); }
+    .btn-icon svg { width: 16px; height: 16px; fill: white; }
+    .video-play-overlay {
+      position: absolute; inset: 0; bottom: 56px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.15); transition: opacity 0.2s;
+      cursor: pointer;
+    }
+    .video-play-overlay svg { width: 52px; height: 52px; fill: rgba(255,255,255,0.9); filter: drop-shadow(0 2px 12px rgba(0,0,0,0.6)); transition: transform 0.15s; }
+    .video-play-overlay:hover svg { transform: scale(1.1); }
+    .video-wrap.playing .video-play-overlay { opacity: 0; pointer-events: none; }
+    .video-wrap.playing:hover .video-play-overlay { opacity: 0; }
+
+    /* Custom fullscreen overlay for vertical video */
+    #vfs-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.96); align-items: center; justify-content: center;
+    }
+    #vfs-overlay.open { display: flex; }
+    #vfs-inner {
+      position: relative; height: 100svh;
+      max-width: min(calc(100svh * 9 / 16), 100vw);
+      width: 100%;
+    }
+    #vfs-inner video { width: 100%; height: 100%; object-fit: contain; display: block; }
+    #vfs-close {
+      position: fixed; top: 20px; right: 20px;
+      background: rgba(255,255,255,0.18); border: none; cursor: pointer;
+      color: white; font-size: 1.5rem; width: 52px; height: 52px;
+      border-radius: 50%; backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, transform 0.15s; z-index: 1;
+      border: 1.5px solid rgba(255,255,255,0.2);
+    }
+    #vfs-close:hover { background: rgba(0,200,255,0.4); transform: scale(1.08); }
+    #vfs-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 14px 18px 24px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      display: flex; gap: 12px; align-items: center;
+    }
+    #vfs-hint {
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5); font-size: 0.75rem; letter-spacing: 1px;
+      padding: 6px 16px; border-radius: 50px; pointer-events: none;
+    }
+
+    /* ─── ABOUT / MANIFESTO ─── */
+    .about-section { background: var(--navy2); }
+    .manifesto-wrap {
+      position: relative;
+      background: var(--navy);
+      border: 1px solid rgba(0,200,255,0.12);
+      border-radius: 24px; padding: 56px 52px;
+      overflow: hidden;
+    }
+    @media (max-width: 640px) { .manifesto-wrap { padding: 36px 28px; } }
+    .manifesto-wrap::before {
+      content: '⚡'; position: absolute;
+      top: -20px; right: 30px;
+      font-size: 12rem; opacity: 0.025; pointer-events: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      line-height: 1;
+    }
+    .manifesto-wrap::after {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), transparent);
+    }
+    .manifesto-inner {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 60px; align-items: center;
+    }
+    @media (max-width: 700px) { .manifesto-inner { grid-template-columns: 1fr; gap: 36px; } }
+    .manifesto-name {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      text-transform: uppercase; line-height: 0.9;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      margin-bottom: 12px;
+    }
+    .manifesto-name .first { color: var(--white); }
+    .manifesto-name .last {
+      color: transparent; -webkit-text-stroke: 2px var(--cyan);
+    }
+    .manifesto-role {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,200,255,0.1); border: 1px solid rgba(0,200,255,0.25);
+      border-radius: 50px; padding: 6px 16px;
+      font-size: 0.82rem; font-weight: 600; color: var(--cyan);
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 28px;
+    }
+    .manifesto-quote {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem); text-transform: uppercase;
+      line-height: 1.15; color: var(--white);
+      margin-bottom: 24px;
+    }
+    .manifesto-quote em { color: var(--cyan); font-style: normal; }
+    .manifesto-text { font-size: 0.97rem; color: var(--gray); line-height: 1.7; margin-bottom: 32px; }
+    .manifesto-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pill {
+      padding: 7px 18px; border-radius: 50px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.85rem; font-weight: 600; color: #c0d4ec;
+    }
+    .manifesto-stats {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+    }
+    .m-stat {
+      background: rgba(0,200,255,0.06); border: 1px solid rgba(0,200,255,0.12);
+      border-radius: 14px; padding: 22px 20px;
+    }
+    .m-stat .n {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 2.2rem; color: var(--cyan); line-height: 1; margin-bottom: 4px;
+    }
+    .m-stat .l { font-size: 0.85rem; color: var(--gray); }
+
+    /* ─── FORM ─── */
+    .form-section {
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 110%, rgba(0,100,255,0.18) 0%, transparent 65%),
+        var(--navy);
+    }
+    .form-wrap {
+      background: var(--navy2); border: 1px solid rgba(0,200,255,0.12);
+      border-radius: 24px; overflow: hidden;
+      max-width: 720px; margin: 0 auto;
+    }
+    .form-header {
+      padding: 36px 40px 28px;
+      border-bottom: 1px solid rgba(0,200,255,0.1);
+      background: rgba(0,200,255,0.04);
+    }
+    @media (max-width: 540px) { .form-header { padding: 28px 24px 22px; } }
+    .form-header h2 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.5rem); text-transform: uppercase;
+      line-height: 1.05; margin-bottom: 8px;
+    }
+    .form-header h2 span { color: var(--cyan); }
+    .form-header p { color: var(--gray); font-size: 0.95rem; }
+
+    /* Progress bar */
+    .progress-bar-wrap {
+      padding: 0 40px; margin-top: -1px;
+      background: rgba(0,200,255,0.04);
+      border-bottom: 1px solid rgba(0,200,255,0.1);
+    }
+    @media (max-width: 540px) { .progress-bar-wrap { padding: 0 24px; } }
+    .progress-steps {
+      display: flex; gap: 0; padding: 18px 0;
+    }
+    .step-dot {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 600; color: var(--gray);
+      transition: color 0.3s;
+    }
+    .step-dot.active { color: var(--cyan); }
+    .step-dot.done { color: rgba(0,200,255,0.5); }
+    .step-num {
+      width: 24px; height: 24px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.15);
+      font-size: 0.72rem; font-weight: 800; flex-shrink: 0;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .step-dot.active .step-num { background: var(--cyan); border-color: var(--cyan); color: var(--navy); }
+    .step-dot.done .step-num { background: rgba(0,200,255,0.2); border-color: var(--cyan); color: var(--cyan); }
+    .step-label { display: none; }
+    @media (min-width: 500px) { .step-label { display: inline; } }
+    .step-line {
+      flex: 1; height: 1.5px; background: rgba(255,255,255,0.08);
+      align-self: center; margin: 0 8px;
+      position: relative; overflow: hidden;
+    }
+    .step-line::after {
+      content: ''; position: absolute; top: 0; left: 0;
+      height: 100%; width: 0%;
+      background: var(--cyan); transition: width 0.4s;
+    }
+    .step-line.filled::after { width: 100%; }
+
+    /* Steps */
+    .form-body { padding: 36px 40px 40px; }
+    @media (max-width: 540px) { .form-body { padding: 24px 24px 30px; } }
+    .form-step { display: none; }
+    .form-step.active { display: block; animation: fadeUp 0.3s ease; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .step-q {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: clamp(1.3rem, 3vw, 1.7rem); text-transform: uppercase;
+      margin-bottom: 6px; line-height: 1.1;
+    }
+    .step-hint { color: var(--gray); font-size: 0.9rem; margin-bottom: 28px; }
+
+    /* Checkbox/Radio tiles */
+    .choices { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+    .choice-label {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 12px 18px; cursor: pointer;
+      font-size: 0.93rem; font-weight: 600; color: #ccdaec;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      user-select: none;
+    }
+    .choice-label input { display: none; }
+    .choice-label:hover { border-color: rgba(0,200,255,0.4); background: rgba(0,200,255,0.06); }
+    .choice-label.selected {
+      border-color: var(--cyan); background: rgba(0,200,255,0.1); color: var(--white);
+    }
+    .choice-check {
+      width: 20px; height: 20px; border-radius: 5px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.15s, border-color 0.15s;
+    }
+    .choice-label.radio .choice-check { border-radius: 50%; }
+    .choice-label.selected .choice-check {
+      background: var(--cyan); border-color: var(--cyan);
+    }
+    .choice-label.selected .choice-check::after {
+      content: '✓'; font-size: 0.7rem; color: var(--navy); font-weight: 900;
+    }
+    .choice-label.radio.selected .choice-check::after {
+      content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--navy);
+    }
+
+    /* Text inputs */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+    .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-field label { font-size: 0.85rem; font-weight: 600; color: var(--gray); }
+    .form-field input, .form-field textarea {
+      background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 13px 16px;
+      color: var(--white); font-family: 'Barlow', sans-serif; font-size: 0.97rem;
+      outline: none; transition: border-color 0.15s, background 0.15s;
+    }
+    .form-field input:focus, .form-field textarea:focus {
+      border-color: var(--cyan); background: rgba(0,200,255,0.05);
+    }
+    .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .form-field textarea { resize: vertical; min-height: 90px; }
+
+    /* Nav buttons */
+    .step-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 8px; }
+    .btn-back {
+      background: transparent; border: 1.5px solid rgba(255,255,255,0.15);
+      color: var(--gray); font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1rem; padding: 12px 24px;
+      border-radius: 50px; cursor: pointer; transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-back:hover { border-color: rgba(255,255,255,0.35); color: var(--white); }
+    .btn-next {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: var(--navy); border: none; cursor: pointer;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.1rem;
+      padding: 13px 34px; border-radius: 50px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 20px rgba(0,130,255,0.3);
+    }
+    .btn-next:hover { transform: scale(1.04); box-shadow: 0 6px 28px rgba(0,130,255,0.45); }
+    .btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .step-counter { font-size: 0.82rem; color: var(--gray); }
+
+    /* Success */
+    #form-success {
+      display: none; text-align: center; padding: 60px 40px;
+      animation: fadeUp 0.4s ease;
+    }
+    #form-success.show { display: block; }
+    .success-icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: rgba(0,200,255,0.1); border: 2px solid rgba(0,200,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; margin: 0 auto 24px;
+    }
+    #form-success h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 2rem; text-transform: uppercase; margin-bottom: 12px;
+    }
+    #form-success h3 span { color: var(--cyan); }
+    #form-success p { color: var(--gray); font-size: 1rem; max-width: 380px; margin: 0 auto; line-height: 1.7; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy2); border-top: 1px solid rgba(0,200,255,0.06);
+      padding: 28px 24px; text-align: center;
+      color: var(--gray); font-size: 0.83rem;
+    }
+    footer strong { color: rgba(255,255,255,0.8); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      section { padding: 70px 20px; }
+      .hero { min-height: 95vh; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <span class="top">SOC<span class="bolt">⚡</span>AL</span>
+    <span class="bot">HERO</span>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('contatto').scrollIntoView({behavior:'smooth'})">
+    Richiedi info →
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-badge"><span class="dot"></span> Ristoranti &amp; Food</div>
+  <h1>
+    Il tuo locale<br/>
+    <span class="line-accent">merita</span><br/>
+    <span class="line-outline">il pieno.</span>
+  </h1>
+  <p class="hero-sub">
+    Creo contenuti che fanno venire <strong>fame a distanza</strong>, gestisco i tuoi social e lancio campagne che portano prenotazioni reali.
+  </p>
+  <div class="hero-ctas">
+    <button class="btn-main" onclick="document.getElementById('contatto').scrollIntoView({behavior:'smooth'})">
+      Voglio più prenotazioni ↓
+    </button>
+    <a class="btn-ghost" href="#servizi">Scopri i servizi</a>
+  </div>
+  <div class="hero-scroll">scopri</div>
+</section>
+
+<!-- PAIN -->
+<section class="pain">
+  <div class="container">
+    <div class="section-eyebrow">Il problema</div>
+    <h2 class="section-title">Hai un ottimo locale.<br/><span>Online però nessuno lo sa.</span></h2>
+    <p class="section-sub">Il 90% dei clienti sceglie dove mangiare guardando i social <em>prima</em> di uscire di casa. Se non li trovi lì, li trova qualcun altro.</p>
+    <div class="stats-strip">
+      <div class="stat-box"><div class="stat-num">90%</div><div class="stat-label">sceglie online dove andare</div></div>
+      <div class="stat-box"><div class="stat-num">3x</div><div class="stat-label">più prenotazioni con ADV locale</div></div>
+      <div class="stat-box"><div class="stat-num">+60%</div><div class="stat-label">engagement con video professionali</div></div>
+      <div class="stat-box"><div class="stat-num">24h</div><div class="stat-label">per sentirsi rispondere da noi</div></div>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card"><span class="pain-icon">📱</span><div><h3>Profilo abbandonato</h3><p>Post irregolari, foto sfocate, nessuna strategia. I clienti guardano e se ne vanno.</p></div></div>
+      <div class="pain-card"><span class="pain-icon">📍</span><div><h3>Zero visibilità locale</h3><p>Chi cerca "ristorante vicino" non ti trova. Il tuo competitor sì.</p></div></div>
+      <div class="pain-card"><span class="pain-icon">🎥</span><div><h3>Contenuti che non vendono</h3><p>Foto del telefono non bastano. Serve storytelling visivo che fa venire voglia di prenotare.</p></div></div>
+      <div class="pain-card"><span class="pain-icon">💸</span><div><h3>Budget bruciato male</h3><p>Boost casuali senza targeting = soldi nel vuoto. Ogni euro deve portare tavoli.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="servizi">
+  <div class="container">
+    <div class="section-eyebrow">Cosa faccio</div>
+    <h2 class="section-title">Un ecosistema completo<br/><span>per il tuo ristorante</span></h2>
+    <p class="section-sub">Come un'agenzia, con la velocità di un freelance. Gestisco tutto — dalla strategia ai risultati misurabili.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-num">01</span>
+        <div class="service-icon">🍽️</div>
+        <h3>Foto &amp; Video Food</h3>
+        <p>Contenuti visivi che valorizzano ogni piatto, ogni luce, ogni atmosfera. Non si tratta solo di fotografare il cibo — si tratta di far sì che chi guarda possa quasi sentirne il profumo.</p>
+        <span class="service-tag">→ Più autorevolezza</span>
+      </div>
+      <div class="service-card">
+        <span class="service-num">02</span>
+        <div class="service-icon">📲</div>
+        <h3>Gestione Social</h3>
+        <p>Strategia editoriale, post costanti, storie, interazione con la community. Il tuo profilo smette di essere uno specchio e diventa uno strumento di lavoro.</p>
+        <span class="service-tag">→ Più fiducia</span>
+      </div>
+      <div class="service-card">
+        <span class="service-num">03</span>
+        <div class="service-icon">🎯</div>
+        <h3>ADV Geolocalizzata</h3>
+        <p>Campagne Meta Ads mirate a chi è già vicino e ha voglia di uscire a cena. Ogni euro speso serve a portare qualcuno al tuo tavolo.</p>
+        <span class="service-tag">→ Più prenotazioni</span>
+      </div>
+      <div class="service-card">
+        <span class="service-num">04</span>
+        <div class="service-icon">📊</div>
+        <h3>Strategia &amp; Report</h3>
+        <p>Non lavoro alla cieca. Monitoro i numeri, ottimizo le campagne e ti aggiorno con report chiari. Sai sempre dove va il tuo investimento.</p>
+        <span class="service-tag">→ Più ROI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOTO -->
+<section style="background: var(--navy2);">
+  <div class="container">
+    <div class="section-eyebrow">Fotografia</div>
+    <h2 class="section-title">Immagini che <span>fanno venire fame</span></h2>
+    <p class="section-sub">Clicca su una foto per ingrandirla.</p>
+    <div class="foto-grid">
+      <div class="foto-item" onclick="openLightbox(0)">
+        <img src="foto/f1.jpg" alt="Food photography 1" loading="lazy" />
+        <div class="foto-overlay"><svg viewBox="0 0 24 24" width="38" height="38" fill="white"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></div>
+      </div>
+      <div class="foto-item" onclick="openLightbox(1)">
+        <img src="foto/f2.jpg" alt="Food photography 2" loading="lazy" />
+        <div class="foto-overlay"><svg viewBox="0 0 24 24" width="38" height="38" fill="white"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></div>
+      </div>
+      <div class="foto-item" onclick="openLightbox(2)">
+        <img src="foto/f3.jpg" alt="Food photography 3" loading="lazy" />
+        <div class="foto-overlay"><svg viewBox="0 0 24 24" width="38" height="38" fill="white"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></div>
+      </div>
+      <div class="foto-item" onclick="openLightbox(3)">
+        <img src="foto/f4.jpg" alt="Food photography 4" loading="lazy" />
+        <div class="foto-overlay"><svg viewBox="0 0 24 24" width="38" height="38" fill="white"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></div>
+      </div>
+      <div class="foto-item" onclick="openLightbox(4)">
+        <img src="foto/f5.jpg" alt="Food photography 5" loading="lazy" />
+        <div class="foto-overlay"><svg viewBox="0 0 24 24" width="38" height="38" fill="white"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></div>
+      </div>
+      <div class="foto-item" onclick="openLightbox(5)">
+        <img src="foto/f6.jpg" alt="Food photography 6" loading="lazy" />
+        <div class="foto-overlay"><svg viewBox="0 0 24 24" width="38" height="38" fill="white"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lb-close" onclick="closeLightbox()">×</button>
+  <button id="lb-prev" onclick="lbNav(-1)">‹</button>
+  <img id="lb-img" src="" alt="" />
+  <button id="lb-next" onclick="lbNav(1)">›</button>
+</div>
+
+<!-- VIDEO -->
+<section class="video-section">
+  <div class="container">
+    <div class="section-eyebrow">Video &amp; Reel</div>
+    <h2 class="section-title">Contenuti che <span>portano clienti</span></h2>
+    <p class="section-sub">Hover per i controlli · 🔊 per attivare l'audio · ⛶ per lo schermo intero verticale</p>
+    <div class="video-grid">
+      <div class="video-wrap" id="vw0">
+        <video id="v0" src="video/v1.mp4" muted playsinline loop preload="metadata"></video>
+        <div class="video-play-overlay" onclick="togglePlay(0)"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-controls">
+          <button class="btn-icon" onclick="togglePlay(0)"><svg id="vicon0" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          <button class="btn-icon" onclick="toggleMute(0)"><svg id="micon0" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg></button>
+          <button class="btn-icon" onclick="goFS(0)"><svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></button>
+        </div>
+      </div>
+      <div class="video-wrap" id="vw1">
+        <video id="v1" src="video/v2.mp4" muted playsinline loop preload="metadata"></video>
+        <div class="video-play-overlay" onclick="togglePlay(1)"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-controls">
+          <button class="btn-icon" onclick="togglePlay(1)"><svg id="vicon1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          <button class="btn-icon" onclick="toggleMute(1)"><svg id="micon1" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg></button>
+          <button class="btn-icon" onclick="goFS(1)"><svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></button>
+        </div>
+      </div>
+      <div class="video-wrap" id="vw2">
+        <video id="v2" src="video/v3.mp4" muted playsinline loop preload="metadata"></video>
+        <div class="video-play-overlay" onclick="togglePlay(2)"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-controls">
+          <button class="btn-icon" onclick="togglePlay(2)"><svg id="vicon2" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          <button class="btn-icon" onclick="toggleMute(2)"><svg id="micon2" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg></button>
+          <button class="btn-icon" onclick="goFS(2)"><svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></button>
+        </div>
+      </div>
+      <div class="video-wrap" id="vw3">
+        <video id="v3" src="video/v4.mp4" muted playsinline loop preload="metadata"></video>
+        <div class="video-play-overlay" onclick="togglePlay(3)"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-controls">
+          <button class="btn-icon" onclick="togglePlay(3)"><svg id="vicon3" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          <button class="btn-icon" onclick="toggleMute(3)"><svg id="micon3" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg></button>
+          <button class="btn-icon" onclick="goFS(3)"><svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></button>
+        </div>
+      </div>
+      <div class="video-wrap" id="vw4">
+        <video id="v4" src="video/v5.mp4" muted playsinline loop preload="metadata"></video>
+        <div class="video-play-overlay" onclick="togglePlay(4)"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-controls">
+          <button class="btn-icon" onclick="togglePlay(4)"><svg id="vicon4" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          <button class="btn-icon" onclick="toggleMute(4)"><svg id="micon4" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg></button>
+          <button class="btn-icon" onclick="goFS(4)"><svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></button>
+        </div>
+      </div>
+      <div class="video-wrap" id="vw5">
+        <video id="v5" src="video/v6.mp4" muted playsinline loop preload="metadata"></video>
+        <div class="video-play-overlay" onclick="togglePlay(5)"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-controls">
+          <button class="btn-icon" onclick="togglePlay(5)"><svg id="vicon5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          <button class="btn-icon" onclick="toggleMute(5)"><svg id="micon5" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg></button>
+          <button class="btn-icon" onclick="goFS(5)"><svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM9 3H3v6h2V5h4V3zM15 21h4v-4h2v6h-6v-2zM9 21H5v-4H3v6h6v-2z"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Fullscreen video overlay (portrait) -->
+<div id="vfs-overlay" onclick="handleFsClick(event)">
+  <div id="vfs-hint">ESC o tocca fuori per chiudere</div>
+  <button id="vfs-close" onclick="closeFS()">×</button>
+  <div id="vfs-inner">
+    <video id="vfs-vid" playsinline loop></video>
+    <div id="vfs-bottom">
+      <button class="btn-icon" id="vfs-play-btn" onclick="vfsPause()"><svg id="vfs-picon" viewBox="0 0 24 24" fill="white" width="16" height="16"><path d="M8 5v14l11-7z"/></svg></button>
+      <button class="btn-icon" id="vfs-mute-btn" onclick="vfsMute()"><svg id="vfs-micon" viewBox="0 0 24 24" fill="white" width="16" height="16"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="container">
+    <div class="section-eyebrow">Chi sono</div>
+    <div class="manifesto-wrap">
+      <div class="manifesto-inner">
+        <div>
+          <div class="manifesto-name">
+            <div class="first">FILIPPO</div>
+            <div class="last">DICOMANI</div>
+          </div>
+          <div class="manifesto-role">⚡ Social Hero</div>
+          <div class="manifesto-quote">
+            "Fai vivere la tua esperienza.<br/><em>Io la racconto.</em>"
+          </div>
+          <p class="manifesto-text">
+            Lavoro con ristoranti, locali e attività food per trasformare la loro presenza online in qualcosa che funziona davvero. Non parlo solo di follower — parlo di persone che prenotano un tavolo perché quello che hanno visto sui social li ha fatti venire fame.
+          </p>
+          <div class="manifesto-pills">
+            <span class="pill">📸 Food photography</span>
+            <span class="pill">🎥 Video &amp; Reel</span>
+            <span class="pill">📲 Social management</span>
+            <span class="pill">🎯 Meta Ads</span>
+          </div>
+        </div>
+        <div class="manifesto-stats">
+          <div class="m-stat"><div class="n">100%</div><div class="l">Dedicato al risultato</div></div>
+          <div class="m-stat"><div class="n">1</div><div class="l">Interlocutore diretto, sempre</div></div>
+          <div class="m-stat"><div class="n">24h</div><div class="l">Risposta garantita</div></div>
+          <div class="m-stat"><div class="n">🚀</div><div class="l">Niente agenzie intermediarie</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="contatto">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 40px;">
+      <div class="section-eyebrow" style="justify-content:center;">Iniziamo</div>
+      <h2 class="section-title">Parliamo del tuo<br/><span>ristorante</span></h2>
+      <p class="section-sub" style="margin: 0 auto;">Rispondi a 4 domande veloci — riceverai una risposta entro <strong style="color:var(--white)">24 ore</strong>.</p>
+    </div>
+    <div class="form-wrap">
+      <div class="form-header">
+        <h2>Richiedi una <span>consulenza gratuita</span></h2>
+        <p>Nessun impegno. Solo una chiacchierata per capire se posso aiutarti.</p>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-steps" id="progress-steps">
+          <div class="step-dot active" id="sd0"><span class="step-num">1</span><span class="step-label">&nbsp;Obiettivo</span></div>
+          <div class="step-line" id="sl0"></div>
+          <div class="step-dot" id="sd1"><span class="step-num">2</span><span class="step-label">&nbsp;Servizi</span></div>
+          <div class="step-line" id="sl1"></div>
+          <div class="step-dot" id="sd2"><span class="step-num">3</span><span class="step-label">&nbsp;Situazione</span></div>
+          <div class="step-line" id="sl2"></div>
+          <div class="step-dot" id="sd3"><span class="step-num">4</span><span class="step-label">&nbsp;Budget</span></div>
+          <div class="step-line" id="sl3"></div>
+          <div class="step-dot" id="sd4"><span class="step-num">5</span><span class="step-label">&nbsp;Contatto</span></div>
+        </div>
+      </div>
+
+      <div class="form-body" id="form-body">
+
+        <!-- STEP 1 -->
+        <div class="form-step active" id="step1">
+          <div class="step-q">Cosa vorresti ottenere?</div>
+          <div class="step-hint">Puoi selezionare più opzioni.</div>
+          <div class="choices" id="choices1">
+            <label class="choice-label" data-val="prenotazioni"><input type="checkbox"/><span class="choice-check"></span>📅 Più prenotazioni</label>
+            <label class="choice-label" data-val="immagine"><input type="checkbox"/><span class="choice-check"></span>✨ Migliorare l'immagine online</label>
+            <label class="choice-label" data-val="social"><input type="checkbox"/><span class="choice-check"></span>📲 Gestione social attiva</label>
+            <label class="choice-label" data-val="adv"><input type="checkbox"/><span class="choice-check"></span>🎯 Campagne pubblicitarie</label>
+            <label class="choice-label" data-val="contenuti"><input type="checkbox"/><span class="choice-check"></span>🎥 Contenuti foto e video</label>
+            <label class="choice-label" data-val="tutto"><input type="checkbox"/><span class="choice-check"></span>🚀 Tutto quanto</label>
+          </div>
+          <div class="step-nav">
+            <span class="step-counter">1 / 5</span>
+            <button class="btn-next" onclick="nextStep(1)">Avanti →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="form-step" id="step2">
+          <div class="step-q">Quali servizi ti interessano?</div>
+          <div class="step-hint">Seleziona tutto ciò che è rilevante.</div>
+          <div class="choices" id="choices2">
+            <label class="choice-label" data-val="fotovideo"><input type="checkbox"/><span class="choice-check"></span>📸 Fotografia &amp; Video professionale</label>
+            <label class="choice-label" data-val="gestione"><input type="checkbox"/><span class="choice-check"></span>📱 Gestione profili social</label>
+            <label class="choice-label" data-val="ads"><input type="checkbox"/><span class="choice-check"></span>📊 Campagne Meta / Google Ads</label>
+            <label class="choice-label" data-val="strategia"><input type="checkbox"/><span class="choice-check"></span>💡 Strategia e consulenza</label>
+            <label class="choice-label" data-val="branding"><input type="checkbox"/><span class="choice-check"></span>🎨 Branding e identità visiva</label>
+          </div>
+          <div class="step-nav">
+            <button class="btn-back" onclick="prevStep(2)">← Indietro</button>
+            <span class="step-counter">2 / 5</span>
+            <button class="btn-next" onclick="nextStep(2)">Avanti →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="form-step" id="step3">
+          <div class="step-q">Come gestisci oggi la tua comunicazione?</div>
+          <div class="step-hint">Una sola risposta.</div>
+          <div class="choices" id="choices3">
+            <label class="choice-label radio" data-val="solo"><input type="radio" name="r3"/><span class="choice-check"></span>💪 Faccio tutto da solo</label>
+            <label class="choice-label radio" data-val="agenzia"><input type="radio" name="r3"/><span class="choice-check"></span>🏢 Ho già un'agenzia o freelance</label>
+            <label class="choice-label radio" data-val="parttime"><input type="radio" name="r3"/><span class="choice-check"></span>👥 Ho qualcuno part-time</label>
+            <label class="choice-label radio" data-val="provato"><input type="radio" name="r3"/><span class="choice-check"></span>😕 Ho provato ma non ero soddisfatto</label>
+            <label class="choice-label radio" data-val="niente"><input type="radio" name="r3"/><span class="choice-check"></span>🚫 Non ho nulla, parto da zero</label>
+          </div>
+          <div class="step-nav">
+            <button class="btn-back" onclick="prevStep(3)">← Indietro</button>
+            <span class="step-counter">3 / 5</span>
+            <button class="btn-next" onclick="nextStep(3)">Avanti →</button>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="form-step" id="step4">
+          <div class="step-q">Quanto pensi di investire ogni mese?</div>
+          <div class="step-hint">Indicativamente — nessun impegno.</div>
+          <div class="choices" id="choices4">
+            <label class="choice-label radio" data-val="0"><input type="radio" name="r4"/><span class="choice-check"></span>🔍 Non ho ancora un budget definito</label>
+            <label class="choice-label radio" data-val="basso"><input type="radio" name="r4"/><span class="choice-check"></span>💰 Meno di €300/mese</label>
+            <label class="choice-label radio" data-val="medio"><input type="radio" name="r4"/><span class="choice-check"></span>💰💰 Tra €300 e €700/mese</label>
+            <label class="choice-label radio" data-val="alto"><input type="radio" name="r4"/><span class="choice-check"></span>💰💰💰 Tra €700 e €1.500/mese</label>
+            <label class="choice-label radio" data-val="premium"><input type="radio" name="r4"/><span class="choice-check"></span>🚀 Oltre €1.500/mese</label>
+          </div>
+          <div class="step-nav">
+            <button class="btn-back" onclick="prevStep(4)">← Indietro</button>
+            <span class="step-counter">4 / 5</span>
+            <button class="btn-next" onclick="nextStep(4)">Avanti →</button>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="form-step" id="step5">
+          <div class="step-q">Quasi fatto! Come ti contatto?</div>
+          <div class="step-hint">Ti rispondo entro 24 ore.</div>
+          <div class="form-row">
+            <div class="form-field"><label>Nome e cognome *</label><input type="text" id="f-nome" placeholder="Mario Rossi" /></div>
+            <div class="form-field"><label>Nome del ristorante *</label><input type="text" id="f-locale" placeholder="Il Mio Ristorante" /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label>Numero di telefono *</label><input type="tel" id="f-tel" placeholder="+39 333 000 0000" /></div>
+            <div class="form-field"><label>Email</label><input type="email" id="f-email" placeholder="mario@ristorante.it" /></div>
+          </div>
+          <div class="form-field"><label>Vuoi aggiungere qualcosa? (opzionale)</label><textarea id="f-msg" placeholder="Descrivimi brevemente il tuo ristorante o cosa ti aspetti..."></textarea></div>
+          <div class="step-nav">
+            <button class="btn-back" onclick="prevStep(5)">← Indietro</button>
+            <span class="step-counter">5 / 5</span>
+            <button class="btn-next" onclick="submitForm()">Invia la richiesta ✓</button>
+          </div>
+        </div>
+
+      </div><!-- /form-body -->
+
+      <!-- SUCCESS -->
+      <div id="form-success">
+        <div class="success-icon">⚡</div>
+        <h3>Richiesta <span>ricevuta!</span></h3>
+        <p>Grazie! Ti contatterò entro <strong>24 ore</strong> per una chiacchierata senza impegno sul tuo ristorante.</p>
+      </div>
+
+    </div><!-- /form-wrap -->
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Social Hero</strong> · Filippo Dicomani · Esperto social media &amp; comunicazione visiva<br/>
+  <small style="opacity:0.5">© 2025 Social Hero — Tutti i diritti riservati</small>
+</footer>
+
+<script>
+  /* ── LIGHTBOX ── */
+  const lbPhotos = ['foto/f1.jpg','foto/f2.jpg','foto/f3.jpg','foto/f4.jpg','foto/f5.jpg','foto/f6.jpg'];
+  let lbIdx = 0;
+  function openLightbox(i) {
+    lbIdx = i;
+    document.getElementById('lb-img').src = lbPhotos[i];
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lbNav(d) {
+    lbIdx = (lbIdx + d + lbPhotos.length) % lbPhotos.length;
+    document.getElementById('lb-img').src = lbPhotos[lbIdx];
+  }
+  document.getElementById('lightbox').addEventListener('click', e => { if (e.target === e.currentTarget) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lbNav(-1);
+    if (e.key === 'ArrowRight') lbNav(1);
+  });
+
+  /* ── VIDEO ── */
+  const N = 6;
+  const PI = '<path d="M8 5v14l11-7z"/>';
+  const PA = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+  const MU = '<path d="M16.5 12A4.5 4.5 0 0 0 14 7.97v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06A8.99 8.99 0 0 0 17 19.73L18.73 21 20 19.73 5.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+  const UN = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/>';
+
+  const vid = i => document.getElementById('v'+i);
+
+  function togglePlay(i) {
+    const v = vid(i), w = document.getElementById('vw'+i);
+    if (v.paused) { v.play(); w.classList.add('playing'); document.getElementById('vicon'+i).innerHTML = PA; }
+    else { v.pause(); w.classList.remove('playing'); document.getElementById('vicon'+i).innerHTML = PI; }
+  }
+  function toggleMute(i) {
+    const v = vid(i);
+    if (v.muted) {
+      for (let j=0;j<N;j++) { if(j!==i){ vid(j).muted=true; document.getElementById('micon'+j).innerHTML=MU; } }
+      v.muted = false; document.getElementById('micon'+i).innerHTML = UN;
+      if (v.paused) togglePlay(i);
+    } else { v.muted=true; document.getElementById('micon'+i).innerHTML=MU; }
+  }
+
+  /* Portrait fullscreen overlay */
+  let fsIdx = -1;
+  function goFS(i) {
+    fsIdx = i;
+    const src = vid(i).src || vid(i).currentSrc;
+    const fsv = document.getElementById('vfs-vid');
+    fsv.src = src;
+    fsv.muted = false;
+    fsv.play();
+    document.getElementById('vfs-picon').innerHTML = PA;
+    document.getElementById('vfs-micon').innerHTML = UN;
+    document.getElementById('vfs-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function handleFsClick(e) {
+    if (e.target === document.getElementById('vfs-overlay')) closeFS();
+  }
+  function closeFS() {
+    const fsv = document.getElementById('vfs-vid');
+    fsv.pause(); fsv.src = '';
+    document.getElementById('vfs-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function vfsPause() {
+    const fsv = document.getElementById('vfs-vid');
+    if (fsv.paused) { fsv.play(); document.getElementById('vfs-picon').innerHTML = PA; }
+    else { fsv.pause(); document.getElementById('vfs-picon').innerHTML = PI; }
+  }
+  function vfsMute() {
+    const fsv = document.getElementById('vfs-vid');
+    fsv.muted = !fsv.muted;
+    document.getElementById('vfs-micon').innerHTML = fsv.muted ? MU : UN;
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('vfs-overlay').classList.contains('open')) closeFS();
+  });
+
+  /* ── FORM ── */
+  let currentStep = 1;
+  const TOTAL = 5;
+
+  // Init choice labels — use mousedown/touchend to avoid double-fire from label+input
+  document.querySelectorAll('.choice-label').forEach(label => {
+    label.addEventListener('click', e => {
+      e.preventDefault(); // prevent input from firing a second event
+      const inp = label.querySelector('input');
+      const isRadio = inp.type === 'radio';
+      if (isRadio) {
+        // deselect siblings
+        document.querySelectorAll(`input[name="${inp.name}"]`).forEach(r => {
+          r.closest('.choice-label').classList.remove('selected');
+          r.checked = false;
+        });
+        label.classList.add('selected');
+        inp.checked = true;
+      } else {
+        label.classList.toggle('selected');
+        inp.checked = label.classList.contains('selected');
+      }
+    });
+  });
+
+  function updateProgress(step) {
+    for (let i = 0; i < TOTAL; i++) {
+      const dot = document.getElementById('sd'+i);
+      if (!dot) continue;
+      dot.classList.remove('active','done');
+      if (i+1 === step) dot.classList.add('active');
+      else if (i+1 < step) dot.classList.add('done');
+      if (i < TOTAL-1) {
+        const line = document.getElementById('sl'+i);
+        if (line) { line.classList.toggle('filled', i+1 < step); }
+      }
+    }
+  }
+
+  function nextStep(from) {
+    document.getElementById('step'+from).classList.remove('active');
+    currentStep = from + 1;
+    document.getElementById('step'+currentStep).classList.add('active');
+    updateProgress(currentStep);
+    document.getElementById('form-body').scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+  function prevStep(from) {
+    document.getElementById('step'+from).classList.remove('active');
+    currentStep = from - 1;
+    document.getElementById('step'+currentStep).classList.add('active');
+    updateProgress(currentStep);
+  }
+
+  // ── CONFIG EMAIL ──────────────────────────────────────────────
+  // Destinatario: davide.matteoli89@gmail.com
+  // Vai su https://web3forms.com, inserisci quella mail,
+  // ricevi la chiave via email e sostituisci YOUR_ACCESS_KEY_HERE
+  const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
+  // ──────────────────────────────────────────────────────────────
+
+  async function submitForm() {
+    const nome   = document.getElementById('f-nome').value.trim();
+    const tel    = document.getElementById('f-tel').value.trim();
+    const locale = document.getElementById('f-locale').value.trim();
+    const email  = document.getElementById('f-email').value.trim();
+    const msg    = document.getElementById('f-msg').value.trim();
+
+    if (!nome || !tel || !locale) {
+      alert('Compila almeno il nome, il ristorante e il numero di telefono.');
+      return;
+    }
+
+    // Raccogli le risposte dal form multi-step
+    const obiettivi = [...document.querySelectorAll('#choices1 .choice-label.selected')].map(l => l.dataset.val).join(', ');
+    const servizi   = [...document.querySelectorAll('#choices2 .choice-label.selected')].map(l => l.dataset.val).join(', ');
+    const situaz    = document.querySelector('#choices3 .choice-label.selected')?.dataset.val || '-';
+    const budget    = document.querySelector('#choices4 .choice-label.selected')?.dataset.val || '-';
+
+    const body = `
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NUOVA RICHIESTA — Social Hero Ristoranti
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Nome:        ${nome}
+Ristorante:  ${locale}
+Telefono:    ${tel}
+Email:       ${email || '-'}
+
+OBIETTIVI:   ${obiettivi || '-'}
+SERVIZI:     ${servizi || '-'}
+SITUAZIONE:  ${situaz}
+BUDGET:      ${budget}
+
+MESSAGGIO:
+${msg || '-'}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━`.trim();
+
+    // Disabilita il pulsante durante l'invio
+    const btn = document.querySelector('#step5 .btn-next');
+    btn.disabled = true;
+    btn.textContent = 'Invio in corso…';
+
+    try {
+      const payload = {
+        access_key: WEB3FORMS_KEY,
+        subject:    `🍽️ Nuova richiesta da ${nome} — ${locale}`,
+        from_name:  'Social Hero Landing',
+        email:      email || 'noreply@socialhero.it',
+        message:    body,
+      };
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message || 'Errore invio');
+
+      // Successo
+      document.getElementById('form-body').style.display = 'none';
+      document.querySelector('.progress-bar-wrap').style.display = 'none';
+      document.getElementById('form-success').classList.add('show');
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Invia la richiesta ✓';
+      alert('Errore durante l\'invio. Controlla la chiave API in WEB3FORMS_KEY oppure riprova.');
+      console.error(err);
+    }
+  }
+</script>
+</body>
+</html>
